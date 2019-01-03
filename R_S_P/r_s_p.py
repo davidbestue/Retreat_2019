@@ -19,7 +19,7 @@ def id_generator(size=6, chars=['r', 's', 'p']): #'r', 's', 'p'
 
 id_generator()
 
-N=1000
+N=100
 id_generator(N)
 
 a = id_generator(N)
@@ -33,7 +33,7 @@ Acumulate_randomness = []
 m=3
 
 
-for n in range(1,16): ##length of grouping
+for n in range(1, N/2): ##length of grouping
     
     ### All possible combinations   
     s=""
@@ -49,6 +49,7 @@ for n in range(1,16): ##length of grouping
     #no repeted subsequences
     if len(pd.DataFrame(f_obs_filt_rep)[0].unique()) == 1:  
         print( 'No rep freq for ' + str(n))
+        Acumulate_randomness.append(m**n * 1/1)
     
     #there are repeted subsequences
     else: 
@@ -65,12 +66,16 @@ for n in range(1,16): ##length of grouping
             f_exp = [ len(all_poss_comb)/m**n for i in range(0, len(f_obs))]
             
             print(chisquare(f_obs, f_exp))
-            if chisquare(f_obs, f_exp)[1]<0.05:
-                Acumulate_randomness.append(m**n)
+            stat, p_value = chisquare(f_obs, f_exp)[1]
+            Acumulate_randomness.append(m**n * 1/p_value)
+            if p_value <0.05:
+                print( 'Rep for ' + str(n))
+                
+                
         
         else: ## memory error
             print( 'Rep of ' + str(n))
-            Acumulate_randomness.append(m**n)
+            Acumulate_randomness.append(m**n * 1/0.05)
 
 
 
