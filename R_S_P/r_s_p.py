@@ -33,7 +33,7 @@ Acumulate_randomness = []
 m=3
 
 
-for n in [2,3]: ##length of grouping
+for n in range(1,16): ##length of grouping
     
     ### All possible combinations   
     s=""
