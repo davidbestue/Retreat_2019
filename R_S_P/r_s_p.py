@@ -47,9 +47,17 @@ n=2
 for i in range(0, n):
     all_pairs.append( [seq[a]+ seq[a+1] for a in range(i,len(seq)-n,2) ] )
 
-all_p = list(itertools.chain.from_iterable(all_pairs))
-all_p = pd.DataFrame(all_p)
-all_p[0].unique()
+all_p_list = list(itertools.chain.from_iterable(all_pairs))
+all_p = pd.DataFrame(all_p_list)
+
+unique = all_p[0].unique()
+unique_freq=[]
+
+for i in unique:
+    unique_freq.append(all_p_list.count(i))
+
+
+
 chisquare([f_r, f_s, f_p], f_exp=[len(seq)/3, len(seq)/3, len(seq)/3])
 
 
