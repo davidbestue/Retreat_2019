@@ -94,6 +94,29 @@ print('')
 print('Randomness of the sequence: ')
 ##### Bigger the number, less random is!!!!!
 print(rand_seq)
-    
+
+
+
+####### formula for likelihood in multinomial
+
+# https://en.wikipedia.org/wiki/Multinomial_test
+
+p_i = freq_obs / N 
+
+freq_obs=[5,4,1,2.5.7]
+
+lk = -2 * sum( freq_obs[i] * np.log( / p_i )])
+
+
+q2 = 1+(m**n + 1 / 6*N ) + ( (m**n)**2 / 6*N**2)
+
+
+
+
+
+
+
+
+
     
 
