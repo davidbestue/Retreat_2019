@@ -9,9 +9,11 @@ import string
 import random
 from scipy.stats import chisquare
 import itertools
+import pandas as pd
 
 
 
+#### Generate a sequence of rsq
 def id_generator(size=6, chars=['r', 's', 'p']): #'r', 's', 'p'
     return ''.join(random.choice(chars) for _ in range(size))
 
@@ -31,6 +33,12 @@ f_s = seq.count('s')
 f_p = seq.count('p')
 chisquare([f_r, f_s, f_p], f_exp=[len(seq)/3, len(seq)/3, len(seq)/3])
 
+
+### formula
+
+#m**n (m is 3: 'p, r, s', and n is the group (2, 3.... (n-1)))
+
+
 #### Consecutive pairs
 
 all_pairs=[]
@@ -39,8 +47,12 @@ n=2
 for i in range(0, n):
     all_pairs.append( [seq[a]+ seq[a+1] for a in range(i,len(seq)-n,2) ] )
 
+all_p = list(itertools.chain.from_iterable(all_pairs))
+all_p = pd.DataFrame(all_p)
+all_p[0].unique()
+chisquare([f_r, f_s, f_p], f_exp=[len(seq)/3, len(seq)/3, len(seq)/3])
 
-list(itertools.chain.from_iterable(all_pairs))
+
 
 ### trios
 all_trios=[]
