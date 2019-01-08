@@ -26,8 +26,7 @@ from easygui import multenterbox
 
 #Dialogue box for subject name
 screen_dim =[1600, 900]
-
-rounds=2
+rounds=4
 
 black=[-1,-1,-1]
 
@@ -140,9 +139,32 @@ for trial in range(0, rounds):
     winner_txt=visual.TextStim(win=win, text= winner, pos=[0, -0.1* screen_dim[1]], wrapWidth=screen_dim[0]/2, color=black, units='pix', height=screen_dim[1]/10) 
     winner_txt.draw()
     win.flip()
-    core.wait(2)
+    core.wait(1)
     responses.append([player1, player2, pl1_resp, pl2_resp, winner])
-    
+
+
+#win.close()
+df = pd.DataFrame(responses)
+df.columns = ['player1', 'player2', 'resp1', 'resp2', 'result'] 
+wins_p1 = df.loc[df.result == player1, 'result'].count()
+wins_p2 = df.loc[df.result == player2, 'result'].count()
+
+if wins_p1>wins_p2:
+    Final_result_text =visual.TextStim(win=win, text= player1 + ' wins! ' + str(wins_p1) + '-' + str(wins_p2), pos=[0, -0.1* screen_dim[1]], wrapWidth=screen_dim[0]/2, color=black, units='pix', height=screen_dim[1]/8) 
+
+elif wins_p2>wins_p1:
+    Final_result_text =visual.TextStim(win=win, text= player2 + ' wins! ' + str(wins_p2) + '-' + str(wins_p1), pos=[0, -0.1* screen_dim[1]], wrapWidth=screen_dim[0]/2, color=black, units='pix', height=screen_dim[1]/8) 
+
+else:
+    Final_result_text =visual.TextStim(win=win, text=' Draw! ' + str(wins_p2) + '-' + str(wins_p1), pos=[0, -0.1* screen_dim[1]], wrapWidth=screen_dim[0]/2, color=black, units='pix', height=screen_dim[1]/8) 
+
+
+Final_result_text.draw()
+win.flip()
+core.wait(10)
+
+win.close()
+
 
 
 
