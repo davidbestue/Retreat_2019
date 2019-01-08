@@ -31,13 +31,17 @@ rounds=4
 black=[-1,-1,-1]
 
 root_imgs = os.getcwd() + '\\images\\' 
+root_save = os.getcwd() + '\\results\\' 
+
 
 msg = 'Names '
 title = "Subjects information"
-fieldNames = ["Player_left", "Player_right"]
+fieldNames = ["Player_left", "Player_right", "battle number"]
 fieldValues = multenterbox(msg,title, fieldNames)
 player1 = fieldValues[0]
 player2 = fieldValues[1]
+b_n = fieldValues[2]
+
 
 
 win = psychopy.visual.Window(size=screen_dim, units="pix", pos=(0, 0), fullscr=True, allowGUI=True)
@@ -143,7 +147,7 @@ for trial in range(0, rounds):
     responses.append([player1, player2, pl1_resp, pl2_resp, winner])
 
 
-#win.close()
+## Calculate_winner
 df = pd.DataFrame(responses)
 df.columns = ['player1', 'player2', 'resp1', 'resp2', 'result'] 
 wins_p1 = df.loc[df.result == player1, 'result'].count()
@@ -151,19 +155,27 @@ wins_p2 = df.loc[df.result == player2, 'result'].count()
 
 if wins_p1>wins_p2:
     Final_result_text =visual.TextStim(win=win, text= player1 + ' wins! ' + str(wins_p1) + '-' + str(wins_p2), pos=[0, -0.1* screen_dim[1]], wrapWidth=screen_dim[0]/2, color=black, units='pix', height=screen_dim[1]/8) 
-
+    winner_subject=player1
 elif wins_p2>wins_p1:
     Final_result_text =visual.TextStim(win=win, text= player2 + ' wins! ' + str(wins_p2) + '-' + str(wins_p1), pos=[0, -0.1* screen_dim[1]], wrapWidth=screen_dim[0]/2, color=black, units='pix', height=screen_dim[1]/8) 
-
+    winner_subject=player2
 else:
     Final_result_text =visual.TextStim(win=win, text=' Draw! ' + str(wins_p2) + '-' + str(wins_p1), pos=[0, -0.1* screen_dim[1]], wrapWidth=screen_dim[0]/2, color=black, units='pix', height=screen_dim[1]/8) 
-
+    winner_subject=draw
 
 Final_result_text.draw()
 win.flip()
 core.wait(10)
 
 win.close()
+
+df['winner_round'] = winner_subject
+df['battle_number'] = int(b_n)
+
+
+name_df = b_n + '_' + player1 + '_' + player2 + '.xlsx'
+df.to_excel(root_save + name_df )
+
 
 
 
