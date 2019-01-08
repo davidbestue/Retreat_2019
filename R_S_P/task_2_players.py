@@ -23,6 +23,7 @@ import easygui
 from easygui import multenterbox
 
 
+# https://www.iconfinder.com/icons/2088376/game_gesture_hand_right_rock_win_icon
 
 #Dialogue box for subject name
 screen_dim =[1600, 900]
