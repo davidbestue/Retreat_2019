@@ -21,7 +21,7 @@ import os
 import glob
 import easygui
 from easygui import multenterbox
-import pyglet
+
 
 
 #Dialogue box for subject name
@@ -42,9 +42,8 @@ player2 = fieldValues[1]
 
 
 win = psychopy.visual.Window(size=screen_dim, units="pix", pos=(0, 0), fullscr=True, allowGUI=True)
-key=pyglet.window.key
-keyboard = key.KeyStateHandler()
-win.winHandle.push_handlers(keyboard)
+
+responses=[]
 
 
 
@@ -52,77 +51,101 @@ for trial in range(0, rounds):
     
     #Trial number
     trial_number=visual.TextStim(win=win, text= str(trial) + '/' +str(rounds) , pos=[screen_dim[0]/3, screen_dim[1]/2.3], wrapWidth=screen_dim[0]/2, color=[1,1,1], units='pix', height=screen_dim[1]/25) 
-    trial_number.draw()
-    
     #Names players
-    pl1=visual.TextStim(win=win, text=player1, pos=[ -0.25* screen_dim[0],  0.25* screen_dim[1]], wrapWidth=screen_dim[0]/2, color=[1,1,1], units='pix', height=screen_dim[1]/15) 
-    pl2=visual.TextStim(win=win, text=player2, pos=[ +0.25* screen_dim[0],  0.25* screen_dim[1]], wrapWidth=screen_dim[0]/2, color=[1,1,1], units='pix', height=screen_dim[1]/15) 
-    pl1.draw()
-    pl2.draw()
-    
+    pl1=visual.TextStim(win=win, text=player1, pos=[ -0.25* screen_dim[0],  0.35* screen_dim[1]], wrapWidth=screen_dim[0]/2, color=[1,1,1], units='pix', height=screen_dim[1]/15) 
+    pl2=visual.TextStim(win=win, text=player2, pos=[ +0.25* screen_dim[0],  0.35* screen_dim[1]], wrapWidth=screen_dim[0]/2, color=[1,1,1], units='pix', height=screen_dim[1]/15) 
     
     #play instruction
     play_txt=visual.TextStim(win=win, text='Play!', pos=[0, -0.1* screen_dim[1]], wrapWidth=screen_dim[0]/2, color=black, units='pix', height=screen_dim[1]/10) 
+    
+    ## Start
+    trial_number.draw()
+    pl1.draw()
+    pl2.draw()
     play_txt.draw()
     
-    p1_dec = 'None'
-    p2_dec = 'None'
-    
-    while p1_dec == 'None' or p2_dec == 'None':
-        
-        ##      
-        print(p1_dec, p2_dec)
-        #
-        if keyboard[key.A]:
-            p1_dec = 'left'
-        
-        if keyboard[key.L]:
-            p2_dec = 'right'      
-    
-    
-    print(p1_dec, p2_dec)
-        
-        
-    
-    
-    #scape loop
-    if keyboard[key.E]:
-        win.close()
-    
-    
-    #######
-    
-    if mouse_click[0]: #keyboard[key.A]:
-        mov_ang=1
-
-    
-    rock = root_imgs + 'rock.png'
-    rock_img = psychopy.visual.ImageStim(win=win, image=rock , units='pix',size=(250,350), ori=0, pos=(150, 100))                                                           
-    #Draww and display
-    rock_img.draw()                                                                                                                                                 
     win.flip()
+    decisions = []
+    list_options = ["left", "right", "up", "a", "w", "d"]
     
-    core.wait(1)
+    while len(decisions)<2:
+        keys_pressed= psychopy.event.waitKeys(keyList=list_options)
+        #print(keys_pressed)
+        decisions.append(keys_pressed[0])
+        if keys_pressed[0] in ["left", "right", "up"]:
+            list_options = ["a", "w", "d"]
+        else:
+            list_options = ["left", "right", "up"]
     
     
+    ##
+    #print(decisions)
+    #print('Done!')
+    if decisions[0] in ['a', 'w', 'd']:
+        pl1_resp = decisions[0]
+        pl2_resp = decisions[1]
+    else:
+        pl1_resp = decisions[1]
+        pl2_resp = decisions[0] 
+    
+    ## convert to rock, paper, scissor
+    if pl1_resp =='a':
+        pl1_resp = 'rock'
+    elif pl1_resp =='w':
+        pl1_resp = 'paper'
+    elif pl1_resp =='d':
+        pl1_resp = 'scissor'
+    
+    #
+    if pl2_resp =='left':
+        pl2_resp = 'rock'
+    elif pl2_resp =='up':
+        pl2_resp = 'paper'
+    elif pl2_resp =='right':
+        pl2_resp = 'scissor'
+    
+    print(decisions)
+    print(pl1_resp, pl2_resp)
+    #imgs
+    resp_img1= root_imgs +  pl1_resp + '.png'
+    p1_img = psychopy.visual.ImageStim(win=win, image=resp_img1 , units='pix',size=(screen_dim[1]/2.5,screen_dim[1]/2.5), ori=0, pos=[ -0.25* screen_dim[0],  -0.05* screen_dim[1]]) 
+    p1_img.draw()  
+    resp_img2 = root_imgs +  pl2_resp + '.png'
+    p2_img = psychopy.visual.ImageStim(win=win, image=resp_img2 , units='pix',size=(screen_dim[1]/2.5,screen_dim[1]/2.5), ori=0, pos=[ 0.25* screen_dim[0],  -0.05* screen_dim[1]]) 
+    p2_img.draw()  
+    trial_number.draw()
+    pl1.draw()
+    pl2.draw() 
+    
+    if pl1_resp == pl2_resp:
+        winner='draw'
+    elif pl1_resp == 'rock':
+        if pl2_resp == 'paper':
+            winner = player2
+        elif pl2_resp == 'scissor':
+            winner = player1
+    elif pl1_resp == 'paper':
+        if pl2_resp == 'rock':
+            winner = player1
+        elif pl2_resp == 'scissor':
+            winner = player2
+    elif pl1_resp == 'scissor':
+        if pl2_resp == 'rock':
+            winner = player2
+        elif pl2_resp == 'paper':
+            winner = player1
+    
+    
+    print(winner)
+    winner_txt=visual.TextStim(win=win, text= winner, pos=[0, -0.1* screen_dim[1]], wrapWidth=screen_dim[0]/2, color=black, units='pix', height=screen_dim[1]/10) 
+    winner_txt.draw()
+    win.flip()
+    core.wait(2)
+    responses.append([player1, player2, pl1_resp, pl2_resp, winner])
+    
 
 
 
-rock = root_imgs + 'rock.png'
-rock_img = psychopy.visual.ImageStim(win=win, image=rock , units='pix',size=(screen_dim[1]/2.5,screen_dim[1]/2.5), ori=0, pos=(150, 100))                                                           
-rock_img.draw()                                                                                                                                                 
-win.flip()
-
-scissors = root_imgs + 'scissor.png'
-scissors_img = psychopy.visual.ImageStim(win=win, image=scissors , units='pix',size=(screen_dim[1]/2.5,screen_dim[1]/2.5), ori=0, pos=(150, 100))                                                           
-scissors_img.draw()                                                                                                                                                 
-win.flip()
-
-
-paper = root_imgs + 'paper.png'
-paper_img = psychopy.visual.ImageStim(win=win, image=paper , units='pix',size=(screen_dim[1]/2.5,screen_dim[1]/2.5), ori=0, pos=(150, 100))                                                           
-paper_img.draw()                                                                                                                                                 
-win.flip()
 
 
 
