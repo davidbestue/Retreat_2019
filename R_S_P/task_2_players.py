@@ -26,7 +26,7 @@ from easygui import multenterbox
 
 #Dialogue box for subject name
 screen_dim =[1600, 900]
-rounds=4
+rounds=10
 
 black=[-1,-1,-1]
 
@@ -69,22 +69,22 @@ for trial in range(0, rounds):
     
     win.flip()
     decisions = []
-    list_options = ["left", "right", "up", "a", "w", "d"]
+    list_options = ["left", "right", "down", "a", "s", "d"]
     
     while len(decisions)<2:
         keys_pressed= psychopy.event.waitKeys(keyList=list_options)
         #print(keys_pressed)
         decisions.append(keys_pressed[0])
-        if keys_pressed[0] in ["left", "right", "up"]:
-            list_options = ["a", "w", "d"]
+        if keys_pressed[0] in ["left", "right", "down"]:
+            list_options = ["a", "s", "d"]
         else:
-            list_options = ["left", "right", "up"]
+            list_options = ["left", "right", "down"]
     
     
     ##
     #print(decisions)
     #print('Done!')
-    if decisions[0] in ['a', 'w', 'd']:
+    if decisions[0] in ['a', 's', 'd']:
         pl1_resp = decisions[0]
         pl2_resp = decisions[1]
     else:
@@ -94,7 +94,7 @@ for trial in range(0, rounds):
     ## convert to rock, paper, scissor
     if pl1_resp =='a':
         pl1_resp = 'rock'
-    elif pl1_resp =='w':
+    elif pl1_resp =='s':
         pl1_resp = 'paper'
     elif pl1_resp =='d':
         pl1_resp = 'scissor'
@@ -102,7 +102,7 @@ for trial in range(0, rounds):
     #
     if pl2_resp =='left':
         pl2_resp = 'rock'
-    elif pl2_resp =='up':
+    elif pl2_resp =='down':
         pl2_resp = 'paper'
     elif pl2_resp =='right':
         pl2_resp = 'scissor'
