@@ -162,7 +162,7 @@ elif wins_p2>wins_p1:
     winner_subject=player2
 else:
     Final_result_text =visual.TextStim(win=win, text=' Draw! ' + str(wins_p2) + '-' + str(wins_p1), pos=[0, -0.1* screen_dim[1]], wrapWidth=screen_dim[0]/2, color=black, units='pix', height=screen_dim[1]/8) 
-    winner_subject=draw
+    winner_subject='draw'
 
 Final_result_text.draw()
 win.flip()
