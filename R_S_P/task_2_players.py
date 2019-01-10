@@ -177,8 +177,7 @@ df['battle_number'] = int(b_n)
 name_df = b_n + '_' + player1 + '_' + player2 + '.xlsx'
 df.to_excel(root_save + name_df )
 
-#### db, d, ib, iu, du
-#### iu, d, db, i, ib
+#### 
 
 
 
