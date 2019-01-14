@@ -25,7 +25,7 @@ from function_randomness import randomness_sequence
 
 #Dialogue box for subject name
 screen_dim =[1600, 900]
-rounds=50
+rounds=10
 
 black=[-1,-1,-1]
 
