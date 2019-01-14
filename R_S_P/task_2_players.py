@@ -7,7 +7,6 @@ Created on Tue Jan  8 10:02:54 2019
 
 ##### Tasks 2 players Rock _ paper _ sicssors
 
-
 from random import choice
 import numpy
 from numpy import array, unique
@@ -21,13 +20,13 @@ import os
 import glob
 import easygui
 from easygui import multenterbox
-
+from function_randomness import randomness_sequence
 
 # https://www.iconfinder.com/icons/2088376/game_gesture_hand_right_rock_win_icon
 
 #Dialogue box for subject name
 screen_dim =[1600, 900]
-rounds=10
+rounds=50
 
 black=[-1,-1,-1]
 
@@ -184,12 +183,18 @@ df['repetition'] = int(b_n)
 df['resp1']=df['resp1'].replace(['rock', 'scissor', 'paper'], ['r', 's', 'p'])
 df['resp2']=df['resp2'].replace(['rock', 'scissor', 'paper'], ['r', 's', 'p'])
 
+###
+randomness_p1 =  round(randomness_sequence(list(df['resp1'].values) ), 3) 
+randomness_p2 =  round(randomness_sequence(list(df['resp2'].values) ), 3) 
 
+df['p1_randomness']=randomness_p1
+df['p2_randomness']=randomness_p2
+
+
+###
 name_df = b_n + '_' + player1 + '_' + player2 + '.xlsx'
 df.to_excel(root_save + name_df )
-
 #### 
-
 
 
 
