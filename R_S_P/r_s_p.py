@@ -102,13 +102,34 @@ print(rand_seq)
 # https://en.wikipedia.org/wiki/Multinomial_test
 
 p_i = freq_obs / N 
+n_i = poss_comb / N
 
 freq_obs=[5,4,1,2.5.7]
 
-lk = -2 * sum( freq_obs[i] * np.log( / p_i )])
+lk = -2 * sum( freq_obs[i] * np.log( n_i / p_i )])
 
 
 q2 = 1+(m**n + 1 / 6*N ) + ( (m**n)**2 / 6*N**2)
+
+
+
+### groups as Lluis said
+
+sublists = []
+n=2 ## length of grouping
+
+for len_n in range(0, n):
+    idxs = np.arange(len_n, len(all_poss_comb), n)
+    sublists.append( np.take(all_poss_comb, idxs) )
+
+
+for sequence in sublists:
+    print(sequence)
+
+
+
+
+
 
 
 
