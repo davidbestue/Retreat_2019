@@ -115,17 +115,36 @@ q2 = 1+(m**n + 1 / 6*N ) + ( (m**n)**2 / 6*N**2)
 
 ### groups as Lluis said
 
-sublists = []
-n=2 ## length of grouping
 
-for len_n in range(0, n):
-    idxs = np.arange(len_n, len(all_poss_comb), n)
-    sublists.append( np.take(all_poss_comb, idxs) )
+for n in range(3, 4): ##length of grouping   1,   int(N/2)
+    
+    ### All possible combinations   
+    s=""
+    all_poss_comb = [s.join(seq[i: i+n ]) for i in range(0, len(seq) - (n-1)) ]
+    ##
+    sublists = []
+    for len_n in range(0, n):
+        idxs = np.arange(len_n, len(all_poss_comb), n)
+        sublists.append( np.take(all_poss_comb, idxs) )
+    
+    
+    #just take the ones with at least 2 inside
+    sublists = np.array(sublists)[np.array([len(sublists[i]) for i in range(0, len(sublists))])>1]
+    #print(len(sublists))
+    
+    
+    for n_analysis in range(0, len(sublists)):
+        seq_anal = sublists[n_analysis]
+        seq_anal_p = pd.DataFrame(seq_anal)
+        unique = seq_anal_p[0].unique()
+        
+        ## Count the unique
+        f_obs_filt_rep=[]
+        for i in unique:
+            f_obs_filt_rep.append(list(seq_anal).count(i))
+        
 
-
-for sequence in sublists:
-    print(sequence)
-
+        
 
 
 
