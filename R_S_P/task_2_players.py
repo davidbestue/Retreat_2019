@@ -2,11 +2,10 @@
 """
 Created on Tue Jan  8 10:02:54 2019
 
-@author: David
+@author: David Bestue
 """
 
 ##### Tasks 2 players Rock _ paper _ sicssors
-
 from random import choice
 import numpy
 from numpy import array, unique
@@ -178,8 +177,7 @@ df['b_p1'] = int(b_pl1)
 df['b_p2'] = int(b_pl2)
 df['repetition'] = int(b_n)
 
-
-
+###
 df['resp1']=df['resp1'].replace(['rock', 'scissor', 'paper'], ['r', 's', 'p'])
 df['resp2']=df['resp2'].replace(['rock', 'scissor', 'paper'], ['r', 's', 'p'])
 
@@ -187,14 +185,14 @@ df['resp2']=df['resp2'].replace(['rock', 'scissor', 'paper'], ['r', 's', 'p'])
 randomness_p1 =  round(randomness_sequence(list(df['resp1'].values) ), 3) 
 randomness_p2 =  round(randomness_sequence(list(df['resp2'].values) ), 3) 
 
+###
 df['p1_randomness']=randomness_p1
 df['p2_randomness']=randomness_p2
-
 
 ###
 name_df = b_n + '_' + player1 + '_' + player2 + '.xlsx'
 df.to_excel(root_save + name_df )
-#### 
+ 
 
 
 
