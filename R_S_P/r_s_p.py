@@ -101,10 +101,11 @@ print(rand_seq)
 
 # https://en.wikipedia.org/wiki/Multinomial_test
 
-p_i = freq_obs / N 
-n_i = poss_comb / N
 
 freq_obs=[5,4,1,2.5.7]
+
+p_i = freq_obs / N 
+n_i = m**n / N
 
 lk = -2 * sum( freq_obs[i] * np.log( n_i / p_i )])
 
@@ -135,6 +136,7 @@ for n in range(3, 4): ##length of grouping   1,   int(N/2)
     
     for n_analysis in range(0, len(sublists)):
         seq_anal = sublists[n_analysis]
+        N = len(sublists[n_analysis]) ### for the formula
         seq_anal_p = pd.DataFrame(seq_anal)
         unique = seq_anal_p[0].unique()
         
@@ -142,6 +144,15 @@ for n in range(3, 4): ##length of grouping   1,   int(N/2)
         f_obs_filt_rep=[]
         for i in unique:
             f_obs_filt_rep.append(list(seq_anal).count(i))
+        
+        
+        summatory = []
+        for x in f_obs_filt_rep:
+            summatory.append( x * np.log())
+        
+        p_i = np.array(f_obs_filt_rep)/N
+        n_exp = m**n / N
+        n_i =[n_exp for i in range(0, len(p_i))]
         
 
         
