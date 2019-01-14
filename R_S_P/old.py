@@ -5,6 +5,37 @@ Created on Mon Jan 14 13:58:54 2019
 @author: David
 """
 
+
+import string
+import random
+from scipy.stats import chisquare
+import itertools
+import pandas as pd
+import numpy as np
+
+
+
+#### Generate a sequence of rsq
+def id_generator(size=6, chars=['r', 's', 'p']): #'r', 's', 'p'
+    return ''.join(random.choice(chars) for _ in range(size))
+
+id_generator()
+
+N=100
+id_generator(N)
+
+a = id_generator(N)
+seq = [a[x] for x in range(0, N)]    
+
+
+### Acumulate randomness
+Acumulate_randomness = []
+control_randomness =[]
+### formula to now all the possible combinations
+#m**n (m is 3: 'p, r, s', and n is the group (2, 3.... (n-1)))
+m=3
+
+
 for n in range(1, int(N/2)): ##length of grouping
     
     ### All possible combinations   
