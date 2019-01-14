@@ -173,6 +173,10 @@ win.close()
 df['winner_round'] = winner_subject
 df['battle_number'] = int(b_n)
 
+df['resp1']=df['resp1'].replace(['rock', 'scissor', 'paper'], ['r', 's', 'p'])
+df['resp2']=df['resp2'].replace(['rock', 'scissor', 'paper'], ['r', 's', 'p'])
+
+
 
 name_df = b_n + '_' + player1 + '_' + player2 + '.xlsx'
 df.to_excel(root_save + name_df )
