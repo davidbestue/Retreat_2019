@@ -27,7 +27,7 @@ id_generator()
 
 sums=[]
 for s in range(0,10000):
-    N=100
+    N=50
     id_generator(N)
     
     a = id_generator(N)
@@ -100,14 +100,11 @@ sums_random = sums
 sns.distplot(sums_random)
 stats.shapiro(sums_random)
 
-#np.save('random_val.npy', np.array(sums_random))
+np.save('random_val_50.npy', np.array(sums_random))
+radnom_dist = np.load('random_val_50.npy')
+sns.distplot(radnom_dist)
+plt.show()
 
-#radnom_dist = np.load('random_val.npy')
-#plt.plot(sums_lk_ch, 0.01, 'ko')
-#sns.distplot(radnom_dist)
-#plt.show()
-#
-#print(sums_lk_ch)
 
 
 
