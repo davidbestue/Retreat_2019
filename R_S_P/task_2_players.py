@@ -37,11 +37,15 @@ root_save = os.getcwd() + '\\results\\'
 
 msg = 'Names '
 title = "Subjects information"
-fieldNames = ["Player_left", "Player_right", "battle number"]
+fieldNames = ["Player_left", "beers P_left", "Player_right", "beers P_right", "repetition"]
 fieldValues = multenterbox(msg,title, fieldNames)
 player1 = fieldValues[0]
-player2 = fieldValues[1]
-b_n = fieldValues[2]
+b_pl1 = fieldValues[1]
+
+player2 = fieldValues[2]
+b_pl2 = fieldValues[3]
+
+b_n = fieldValues[4]
 
 
 
@@ -171,11 +175,14 @@ core.wait(10)
 win.close()
 
 df['winner_round'] = winner_subject
-df['battle_number'] = int(b_n)
+df['b_p1'] = int(b_pl1)
+df['b_p2'] = int(b_pl2)
+df['repetition'] = int(b_n)
+
+
 
 df['resp1']=df['resp1'].replace(['rock', 'scissor', 'paper'], ['r', 's', 'p'])
 df['resp2']=df['resp2'].replace(['rock', 'scissor', 'paper'], ['r', 's', 'p'])
-
 
 
 name_df = b_n + '_' + player1 + '_' + player2 + '.xlsx'
