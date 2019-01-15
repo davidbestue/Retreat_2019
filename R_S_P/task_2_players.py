@@ -182,12 +182,15 @@ df['resp1']=df['resp1'].replace(['rock', 'scissor', 'paper'], ['r', 's', 'p'])
 df['resp2']=df['resp2'].replace(['rock', 'scissor', 'paper'], ['r', 's', 'p'])
 
 ###
-randomness_p1 =  round(randomness_sequence(list(df['resp1'].values) ), 3) 
-randomness_p2 =  round(randomness_sequence(list(df['resp2'].values) ), 3) 
+randomness_p1 =  round(randomness_sequence(list(df['resp1'].values) )[0], 3) 
+randomness_p2 =  round(randomness_sequence(list(df['resp2'].values) )[0], 3) 
 
-###
-df['p1_randomness']=randomness_p1
-df['p2_randomness']=randomness_p2
+lk_r_p1 = randomness_sequence(list(df['resp1'].values) )[1]
+lk_r_p2 = randomness_sequence(list(df['resp2'].values) )[1]
+
+for i in range(0, len(lk_r_p1)):
+    df['p1_lik_' +str(i+1)] = lk_r_p1[i]
+    df['p2_lik_' +str(i+1)] = lk_r_p2[i]
 
 ###
 name_df = b_n + '_' + player1 + '_' + player2 + '.xlsx'
