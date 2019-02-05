@@ -49,9 +49,9 @@ def randomness_sequence(seq):
             
             
             summatory = []
-            n_exp = 1/m**n 
+            n_exp = float(1)/m**n 
             for x in f_obs_filt_rep:
-                summatory.append( x * np.log(n_exp/ (x/N_s )))
+                summatory.append( x * np.log(n_exp/ (float(x)/N_s )))
             
             likelihood_ratio = -2*sum(summatory)
             #https://en.wikipedia.org/wiki/Multinomial_test
