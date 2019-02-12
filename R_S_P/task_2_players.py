@@ -24,8 +24,8 @@ from function_randomness import randomness_sequence
 # https://www.iconfinder.com/icons/2088376/game_gesture_hand_right_rock_win_icon
 
 #Dialogue box for subject name
-screen_dim =[1600, 900]
-rounds=10
+screen_dim =[1280, 720]
+rounds=50
 
 black=[-1,-1,-1]
 
@@ -184,6 +184,10 @@ df['resp2']=df['resp2'].replace(['rock', 'scissor', 'paper'], ['r', 's', 'p'])
 ###
 randomness_p1 =  round(randomness_sequence(list(df['resp1'].values) )[0], 3) 
 randomness_p2 =  round(randomness_sequence(list(df['resp2'].values) )[0], 3) 
+
+df['randomness_p1']=randomness_p1
+df['randomness_p2']=randomness_p2
+
 
 lk_r_p1 = randomness_sequence(list(df['resp1'].values) )[1]
 lk_r_p2 = randomness_sequence(list(df['resp2'].values) )[1]
