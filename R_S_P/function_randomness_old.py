@@ -43,7 +43,7 @@ def randomness_old(seq):
             
         #no repeted subsequences
         if len(pd.DataFrame(f_obs_filt_rep)[0].unique()) == 1:  
-            print( 'No rep freq of ' + str(n))
+            #print( 'No rep freq of ' + str(n))
             #Acumulate_randomness.append(m**n * 1/1)
         
         #there are repeted subsequences
@@ -65,12 +65,12 @@ def randomness_old(seq):
                 
                 Acumulate_randomness.append(m**n * 1/p_value)
                 control_randomness.append(m**n * 1/1)
-                print( 'Rep of ' + str(n) + ', p_value = ' + str(p_value))
+                #print( 'Rep of ' + str(n) + ', p_value = ' + str(p_value))
                     
                     
             
             else: ## memory error
-                print( 'Rep of ' + str(n))
+                #print( 'Rep of ' + str(n))
                 Acumulate_randomness.append(m**n * 1/0.05)
                 control_randomness.append(m**n * 1/1)
     
