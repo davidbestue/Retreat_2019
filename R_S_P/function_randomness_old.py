@@ -6,8 +6,6 @@ Created on Tue Feb 12 17:16:55 2019
 """
 
 ### Randomness old+
-
-
 import string
 import random
 from scipy.stats import chisquare
