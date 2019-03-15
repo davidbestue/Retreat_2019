@@ -19,7 +19,7 @@ def randomness_sequence(seq):
     m=3
     N = len(seq)
     likelihood_ratios = []
-    for n in range(1, int(N/2)): ##length of grouping   1,   int(N/2)
+    for n in range(1, int(N/2)+1): ##length of grouping   1,   int(N/2)
         
         ### All possible combinations   
         s=""
