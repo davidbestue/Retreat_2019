@@ -41,12 +41,12 @@ def randomness_old(seq):
             
         #no repeted subsequences
         if len(pd.DataFrame(f_obs_filt_rep)[0].unique()) == 1:  
-            #print( 'No rep freq of ' + str(n))
+            print( 'No rep freq of ' + str(n))
             #Acumulate_randomness.append(m**n * 1/1)
         
         #there are repeted subsequences
         else: 
-            
+            ##
             if n<15:
                 
                 f_obs=np.zeros(m**n)
