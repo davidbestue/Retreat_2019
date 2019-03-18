@@ -65,7 +65,7 @@ def randomness_sequence(seq):
             
     
             
-    score = np.mean(likelihood_ratios)
+    score = sum(likelihood_ratios)
     return score, likelihood_ratios
 
 
